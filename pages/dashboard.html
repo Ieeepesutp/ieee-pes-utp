@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de miembros | IEEE PES UTP</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="private.css">
+</head>
+<body class="private-body">
+
+  <header class="private-header">
+    <a class="private-brand" href="../index.html">
+      <img src="../assets/logo-ieee-pes-utp.png" alt="IEEE PES UTP">
+    </a>
+
+    <nav class="private-nav" aria-label="Navegación del panel">
+      <button class="tab-button active" data-tab="eventos">Eventos</button>
+      <button class="tab-button" data-tab="marketing">Marketing</button>
+    </nav>
+
+    <button class="logout-button" id="logoutButton">
+      Cerrar sesión <span>↗</span>
+    </button>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- PANEL EVENTOS -->
+    <section class="panel-view active" id="panel-eventos">
+
+      <div class="panel-heading">
+        <div>
+          <p class="section-kicker">IEEE PES UTP · COMITÉ DE EVENTOS</p>
+          <h1>Gestión de <em>ponencias.</em></h1>
+          <p>Registra la información de una actividad para que Marketing prepare su publicación.</p>
+        </div>
+        <span class="panel-chip">EVENTOS</span>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-heading">
+          <div>
+            <span class="step-number">01</span>
+            <h2>Registrar nueva ponencia</h2>
+          </div>
+          <span class="required-note">* Campos obligatorios</span>
+        </div>
+
+        <form id="eventForm" class="event-form">
+
+          <label>
+            Título de la ponencia *
+            <input required name="title" placeholder="Ej. Transición energética y redes inteligentes">
+          </label>
+
+          <div class="form-two">
+            <label>
+              Nombre del ponente *
+              <input required name="speaker" placeholder="Nombre completo">
+            </label>
+
+            <label>
+              Fecha *
+              <input required name="date" type="date">
+            </label>
+          </div>
+
+          <div class="form-two">
+            <label>
+              Hora *
+              <input required name="time" type="time">
+            </label>
+
+            <label>
+              Modalidad *
+              <select name="mode" required>
+                <option value="">Selecciona una modalidad</option>
+                <option>Presencial</option>
+                <option>Virtual</option>
+                <option>Híbrida</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Enlace de inscripción
+            <input name="registration" type="url" placeholder="https://...">
+          </label>
+
+          <label>
+            Descripción *
+            <textarea name="description" rows="4" required placeholder="Describe brevemente la ponencia..."></textarea>
+          </label>
+
+          <label>
+            Fotografía del ponente
+            <input name="speakerPhoto" type="file" accept="image/*">
+          </label>
+
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">
+              Guardar <span>→</span>
+            </button>
+            <span id="eventFeedback" class="form-feedback" aria-live="polite"></span>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="panel-card history-card">
+        <div class="card-heading">
+          <div>
+            <span class="step-number">02</span>
+            <h2>Historial de ponencias</h2>
+          </div>
+          <span class="history-count" id="eventCount">0 registros</span>
+        </div>
+
+        <div id="eventHistory" class="history-empty">
+          Todavía no hay ponencias registradas.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PANEL MARKETING -->
+    <section class="panel-view" id="panel-marketing">
+
+      <div class="panel-heading">
+        <div>
+          <p class="section-kicker">IEEE PES UTP · COMITÉ DE MARKETING</p>
+          <h1>Contenido para <em>publicar.</em></h1>
+          <p>Selecciona una ponencia registrada y prepara su pieza gráfica.</p>
+        </div>
+        <span class="panel-chip">MARKETING</span>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-heading">
+          <div>
+            <span class="step-number">01</span>
+            <h2>Ponencias recibidas</h2>
+          </div>
+        </div>
+
+        <div id="marketingQueue" class="history-empty">
+          Las ponencias que registre Eventos aparecerán aquí.
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-heading">
+          <div>
+            <span class="step-number">02</span>
+            <h2>Plantilla oficial IEEE PES UTP</h2>
+          </div>
+        </div>
+
+        <div class="template-preview">
+          <div class="template-brand">
+            IEEE <b>PES</b>
+            <small>UTP · STUDENT BRANCH</small>
+          </div>
+
+          <span class="template-label">PRÓXIMA PONENCIA</span>
+
+          <h3 id="previewTitle">Título de la ponencia</h3>
+          <p id="previewSpeaker">Nombre del ponente</p>
+
+          <div class="template-details">
+            <span id="previewDate">FECHA</span>
+            <span id="previewTime">HORA</span>
+            <span id="previewMode">MODALIDAD</span>
+          </div>
+
+          <div class="template-bottom">
+            POWER & ENERGY SOCIETY · UTP
+          </div>
+        </div>
+
+        <p class="prototype-hint">
+          Vista previa de la plantilla oficial.
+        </p>
+
+        <div class="form-actions">
+          <button class="button button-primary" id="downloadPng" disabled>
+            Descargar <span>↓</span>
+          </button>
+
+          <button class="button button-outline" id="publishEvent" disabled>
+            Publicar <span>→</span>
+          </button>
+        </div>
+
+        <p id="marketingFeedback" class="form-feedback" aria-live="polite"></p>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-heading">
+          <div>
+            <span class="step-number">03</span>
+            <h2>Carátula después del evento</h2>
+          </div>
+        </div>
+
+        <label class="upload-cover">
+          Subir carátula final
+          <input type="file" accept="image/*" id="finalCover">
+        </label>
+
+        <p class="prototype-hint">
+          La publicación definitiva de la carátula se conectará al almacenamiento del proyecto.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="private.js"></script>
+</body>
+</html>
